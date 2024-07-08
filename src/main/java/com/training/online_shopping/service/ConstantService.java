@@ -2,7 +2,7 @@ package com.training.online_shopping.service;
 
 public interface ConstantService {
 
-	final static String TITLE="Online-shopping-apps";
+	final static String TITLE="title";
 	final static String USER_ROLE="USER";
 	final static String ADMIN_ROLE="ADMIN";
 
