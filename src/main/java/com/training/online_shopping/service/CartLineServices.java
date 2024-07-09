@@ -11,13 +11,11 @@ import com.training.online_shopping.repository.CartRepository;
 import com.training.online_shopping.repository.ProductRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Lazy
 public class CartLineServices {
     @Autowired
     private ProductRepository productRepository;
