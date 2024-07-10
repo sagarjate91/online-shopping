@@ -78,7 +78,7 @@ $(function() {
         if (window.category == '') {
         	jsonUrl = window.contextRoot + '/admin/json/data/all/products';
         } else {
-        	jsonUrl = window.contextRoot + '/admin/json/data/category/'+ window.category+ '/products';
+        	jsonUrl = window.contextRoot + '/admin/json/data/category/admin/'+ window.category+ '/products';
         }
 
         $table

@@ -19,7 +19,7 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private int roleId;
+    private Integer roleId;
     private String role;
 
 

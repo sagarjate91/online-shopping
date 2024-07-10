@@ -45,7 +45,7 @@ public class CustomerService {
 
     public List<Product> productsAdmin() {
 
-        return productRepository.findAll();
+        return productRepository.findByActive(1);
     }
 
     public String updateProduct(int id) {
@@ -67,6 +67,9 @@ public class CustomerService {
     }
 
     public List<Product> productsCategory(String categoryName) {
+        return productRepository.findByCategoryAndActive(categoryName,1);
+    }
+    public List<Product> productsCategoryAdmin(String categoryName) {
         return productRepository.findByCategory(categoryName);
     }
 

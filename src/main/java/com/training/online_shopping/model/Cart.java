@@ -16,7 +16,7 @@ public class Cart implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column(name = "grand_total")
 	private double grandTotal;
 	@Column(name = "cart_lines")

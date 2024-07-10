@@ -31,9 +31,15 @@ public class AdminJSONController {
         return service.productsAdmin();
     }
 
+    @GetMapping("/json/data/category/admin/{categoryName}/products")
+    public List<Product> productsCategoryAdmin(@PathVariable("categoryName") String categoryName){
+     return service.productsCategoryAdmin(categoryName);
+
+    }
+
     @GetMapping("/json/data/category/{categoryName}/products")
     public List<Product> productsCategory(@PathVariable("categoryName") String categoryName){
-     return service.productsCategory(categoryName);
+        return service.productsCategory(categoryName);
 
     }
 

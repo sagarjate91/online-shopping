@@ -9,4 +9,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> findByCategory(String categoryName);
 
     List<Product> findByActive(int i);
+
+    List<Product> findByCategoryAndActive(String categoryName, int i);
 }
