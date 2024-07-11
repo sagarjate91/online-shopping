@@ -13,16 +13,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartLine implements Serializable {
-
-
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
-	@OneToOne
-	private Product product;
+	private int productId;
 
 	@Column(name = "cart_id")
 	private int cartId;	
@@ -34,6 +30,8 @@ public class CartLine implements Serializable {
 	@Column(name = "is_available")
 	private boolean available = true;
 
+	@Transient
+	private Product product;
 
 
 

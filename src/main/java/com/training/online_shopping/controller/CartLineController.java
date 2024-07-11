@@ -1,6 +1,8 @@
 package com.training.online_shopping.controller;
 
 
+import com.training.online_shopping.model.CartLine;
+import com.training.online_shopping.repository.ProductRepository;
 import com.training.online_shopping.service.CartLineServices;
 import com.training.online_shopping.service.ConstantService;
 import com.training.online_shopping.service.URLServices;
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/customer/cart")
 @Lazy
 public class CartLineController {
     @Autowired
     private CartLineServices cardLineServices;
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping("/show")
     public ModelAndView showCart(@RequestParam(name = "result", required = false) String result) {
@@ -60,7 +66,11 @@ public class CartLineController {
                 mv.addObject("message", "One or more items inside cart has been modified!");
             }
         }
-        mv.addObject("cartLines", cardLineServices.getCartLines());
+        List<CartLine> cartLines=cardLineServices.getCartLines();
+        cartLines.forEach(s->{
+            s.setProduct(productRepository.findById(s.getProductId()).get());
+        });
+        mv.addObject("cartLines",cartLines);
         return mv;
 
     }

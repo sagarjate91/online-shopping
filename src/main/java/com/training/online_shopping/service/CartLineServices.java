@@ -12,10 +12,12 @@ import com.training.online_shopping.repository.ProductRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CartLineServices {
     @Autowired
     private ProductRepository productRepository;
@@ -44,21 +46,21 @@ public class CartLineServices {
     public String addCartLine(int productId) {
         Cart cart = this.getCart();
         String response = null;
-        CartLine cartLine = cardLineRepository.getByCartAndProduct(cart.getId(), productId);
+        CartLine cartLine = cardLineRepository.getByCartAndProductId(cart.getId(), productId);
         Product product = productRepository.findById(productId).orElse(null);
         if(cartLine==null) {
             // add a new cartLine if a new product is getting added
             cartLine = new CartLine();
              // transfer the product details to cartLine
             cartLine.setCartId(cart.getId());
-            cartLine.setProduct(product);
+            cartLine.setProductId(product.getProductId());
             cartLine.setProductCount(1);
             cartLine.setBuyingPrice(product.getPrice());
             cartLine.setTotal(product.getPrice());
 
             product.setQuantity(product.getQuantity()-1);
             productRepository.saveAndFlush(product);
-
+           // System.out.println(cartLine);
             // insert a new cartLine
             cardLineRepository.save(cartLine);
 
@@ -87,7 +89,7 @@ public class CartLineServices {
         CartLine cartLine = cardLineRepository.findById(cartLineId).orElse(null);
 
         double oldTotal = cartLine.getTotal();
-        Product product = cartLine.getProduct();
+        Product product = productRepository.findById(cartLine.getProductId()).get();
 
         // check if that much quantity is available or not
         if(product.getQuantity() < count) {
@@ -118,7 +120,7 @@ public class CartLineServices {
         boolean changed = false;
         Product product = null;
         for(CartLine cartLine : cartLines) {
-            product = cartLine.getProduct();
+            product = productRepository.findById(cartLine.getProductId()).get();
             changed = false;
 
             // check if the product is active or not
@@ -177,7 +179,7 @@ public class CartLineServices {
     public String removeCartLine(int cartLineId) {
 
        CartLine cartLine = cardLineRepository.findById(cartLineId).orElse(null);
-       Product product = cartLine.getProduct();
+       Product product = productRepository.findById(cartLine.getProductId()).get();
        product.setQuantity(product.getQuantity()+cartLine.getProductCount());
 
         // deduct the cart

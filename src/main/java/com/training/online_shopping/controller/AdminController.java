@@ -6,7 +6,6 @@ import com.training.online_shopping.dto.ProductDTO;
 import com.training.online_shopping.exception.ProductNotFoundException;
 import com.training.online_shopping.model.Category;
 import com.training.online_shopping.model.Product;
-import com.training.online_shopping.model.ProductRecover;
 import com.training.online_shopping.repository.CategoryRepository;
 import com.training.online_shopping.repository.CustomerRepository;
 import com.training.online_shopping.repository.ProductRecoverRepository;
@@ -161,20 +160,6 @@ public class AdminController {
         product1.setQuantity(product.getQuantity());
         product1.setDescription(product.getDescription());
         productRepository.saveAndFlush(product1);
-
-        // backup for product
-        ProductRecover productRecover=new ProductRecover();
-        productRecover.setProductId(product.getProductId());
-        productRecover.setFileName(product.getFileName());
-        productRecover.setPostName(product.getPostName());
-        productRecover.setCategory(product.getCategory());
-        productRecover.setModelNo(product.getModelNo());
-        productRecover.setPrice(product.getPrice());
-        productRecover.setQuantity(product.getQuantity());
-        productRecover.setDescription(product.getDescription());
-        productRecover.setActive(product.getActive());
-        productRecover.setView(product.getView());
-        productRecoverRepository.saveAndFlush(productRecover);
 
         model.addAttribute(ConstantService.MESSAGE, "product updated successfully!");
         return "redirect:/admin/ProductList.htm";
