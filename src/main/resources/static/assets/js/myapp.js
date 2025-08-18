@@ -7,7 +7,7 @@ $(function() {
 		},200);
 	});	
 	
-	/* for fading out the alert message after 2 seconds */
+	/* for fading out the alert message after 3 seconds */
 	$alert = $('.alert');
 	if($alert.length) {
 		setTimeout(function() {

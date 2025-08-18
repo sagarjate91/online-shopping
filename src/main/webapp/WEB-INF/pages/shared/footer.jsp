@@ -6,7 +6,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Online Shopping 2024</p>
+                    <p>Copyright &copy; Online Shopping 2025</p>
                 </div>
             </div>
         </footer>
